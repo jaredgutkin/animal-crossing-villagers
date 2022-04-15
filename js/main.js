@@ -41,7 +41,8 @@ const fetchVillager = () => {
         const villager = results.map((data) => ({
             name: data.name['name-USen'],
             image: data.image_uri,
-            saying: data.saying
+            saying: data.saying,
+            textColor: data.text-color
         }))
         displayVillager(villager)
     })
@@ -59,7 +60,9 @@ const displayVillager = (villager) => {
         <p class="cardSubtitle"> ${vCard.saying}</p>
     </li>
     
-    `)
+    `,
+    vCard.style.cssText = `color: ${textColor}`
+    )
     .join('')
     pokedex.innerHTML = pokemonHTMLString
 }
