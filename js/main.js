@@ -32,7 +32,7 @@
 
 const fetchVillager = () => {
     const promises = []
-    for (let i = 1; i <= 352; i++){
+    for (let i = 1; i <= 10; i++){
         const url = `http://acnhapi.com/v1/villagers/${i}`
         promises.push(fetch(url).then( (res) => res.json()))
     }
@@ -41,8 +41,7 @@ const fetchVillager = () => {
         const villager = results.map((data) => ({
             name: data.name['name-USen'],
             image: data.image_uri,
-            saying: data.saying,
-            textColor: data.text-color
+            saying: data.saying
         }))
         displayVillager(villager)
     })
@@ -53,18 +52,19 @@ const fetchVillager = () => {
 
 const displayVillager = (villager) => {
     
-    const pokemonHTMLString = villager.map ( vCard => `
+    const villagerHTMLString = villager.map ( vCard => `
     <li class="card">
         <img class ="cardImage" src = "${vCard.image}"/>
         <h2 class="cardTitle">${vCard.name}</h2>
         <p class="cardSubtitle"> ${vCard.saying}</p>
     </li>
     
-    `,
-    vCard.style.cssText = `color: ${textColor}`
+    `
+   
     )
     .join('')
-    pokedex.innerHTML = pokemonHTMLString
+    
+    ACvillager.innerHTML = villagerHTMLString
 }
 
 fetchVillager()
